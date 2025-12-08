@@ -1,0 +1,9 @@
+edition = "2024"
+
+max_width = 100
+brace_style = "PreferSameLine"
+control_brace_style = "AlwaysSameLine"
+comment_width = 70
+wrap_comments = true
+fn_args_layout = "Vertical"
+format_strings = true
