@@ -1,8 +1,8 @@
 use std::io;
 
 use crate::models::PasswordOption;
-use crate::utils::confirmation_user;
 use crate::services::{build_charset, generate_password};
+use crate::utils::confirmation_user;
 
 pub fn password_gen() {
     println!("Input password length: ");
