@@ -26,8 +26,26 @@ fn main() {
         .read_line(&mut input_number)
         .expect("Failed to read input");
 
-    let number: usize = input_number.trim().parse().expect("Input must be number");
+    if input_number.trim().is_empty() {
+        println!("Program exit, no value given.");
+        return;
+    }
+
+    let number: usize =  match input_number.trim().parse::<usize>() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Error: input must be a number");
+            return;
+        },
+    };
+
+    if number < 4 {
+        println!("Error: minimum length is 4");
+        return;
+    }
 
     let password = generate_password(number);
+
+    println!("Length: {number}");
     println!("Generated Password: {password}");
 }
