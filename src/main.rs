@@ -31,7 +31,7 @@ fn main() {
         return;
     }
 
-    let number: usize =  match input_number.trim().parse::<usize>() {
+    let number: usize =  match input_number.trim().parse() {
         Ok(num) => num,
         Err(_) => {
             println!("Error: input must be a number");
