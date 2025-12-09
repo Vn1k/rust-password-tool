@@ -1,4 +1,4 @@
-# 🔐 Rust Password Suite
+# 🔐 Rust Password Tool
 
 A secure password generator and password validation tool written in Rust.
 
