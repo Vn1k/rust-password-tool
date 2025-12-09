@@ -1,4 +1,5 @@
 use rand::{Rng, rngs::OsRng};
+use std::io;
 
 //Dictionary character (b = byte with type u8)
 const CHARSET: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -18,7 +19,15 @@ fn generate_password(length: usize) -> String {
 }
 
 fn main() {
-    let length = 10;
-    let password = generate_password(length);
+    println!("Input password length: ");
+    let mut input_number = String::new();
+
+    io::stdin()
+        .read_line(&mut input_number)
+        .expect("Failed to read input");
+
+    let number: usize = input_number.trim().parse().expect("Input must be number");
+
+    let password = generate_password(number);
     println!("Generated Password: {password}");
 }
