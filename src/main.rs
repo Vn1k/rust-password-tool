@@ -1,8 +1,9 @@
 pub mod cli;
+pub mod config;
 pub mod models;
 pub mod services;
 pub mod utils;
 
 fn main() {
-    cli::password_gen();
+    cli::main_ui();
 }

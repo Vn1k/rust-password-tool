@@ -1,11 +1,6 @@
+use crate::config::{DIGITS, LOWERCASE, SYMBOLS, UPPERCASE};
 use crate::models::PasswordOption;
 use rand::{Rng, rngs::OsRng};
-
-//Dictionary character (b = byte with type u8)
-const LOWERCASE: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
-const UPPERCASE: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const DIGITS: &[u8] = b"0123456789";
-const SYMBOLS: &[u8] = b"!@#$%^&*()_-+={}[];:,.?/";
 
 pub fn build_charset(options: &PasswordOption) -> Vec<u8> {
     let mut charset = Vec::new();
