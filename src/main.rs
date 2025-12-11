@@ -5,5 +5,5 @@ pub mod services;
 pub mod utils;
 
 fn main() {
-    cli::main_ui();
+    cli::main_cli();
 }
