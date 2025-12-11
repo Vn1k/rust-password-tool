@@ -16,7 +16,7 @@ impl Config {
             length: self.length,
             use_uppercase: self.uppercase,
             use_digits: self.digits,
-            use_symbols: self.symbols
+            use_symbols: self.symbols,
         }
     }
 }

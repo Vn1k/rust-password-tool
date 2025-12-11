@@ -1,4 +1,3 @@
-use crate::models::Config;
 use crate::services::{load_config, save_config};
 use std::io::{self, Write};
 
