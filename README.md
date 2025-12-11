@@ -1,36 +1,55 @@
-# 🔐 Rust Password Tool
+# 🔐 Rust Password Tool - (rustpass)
 
-A secure password generator and password validation tool written in Rust.
-
-This project is a learning-focused CLI application designed to demonstrate:
-- Secure random generation
-- Password policy enforcement
-- Modular Rust architecture
+A secure, configurable password generator and validation tool written in Rust.
+Designed as a learning-oriented CLI project focused on security, clean architecture, and Rust fundamentals.
 
 ---
 
 ## ✨ Features
 
-### ✅ Password Generator
-- Cryptographically secure random generation (`OsRng`)
-- Configurable length
-- Customizable character sets:
+### 🔑 Password Generator
+- Uses cryptographically secure randomness via `OsRng`
+- Fully configurable:
+  - Length (default from config file)
   - Lowercase
   - Uppercase
   - Digits
   - Symbols
+- Configuration is stored in `~/.config/rustpass/config.toml`
 
-### ✅ Password Validator
-Industry-inspired validation rules:
+### 🛡 Password Validator
+Follows common industry password rules:
 - Minimum length: **12 characters**
-- Must contain at least:
-  - One lowercase character
-  - **3 out of 4 character categories** (uppercase, digit, symbol)
+- Must include lowercase
+- Must include 3 out of 4 categories:
+  - Uppercase
+  - Digit
+  - Symbol
+  - (Lowercase always required)
 
-### ⏳ Under Development
-- Password strength scoring
-- Entropy-based rating
-- CLI usability improvements
+Validator provides clear feedback on failing rules.
+
+---
+
+## ⚙ Configuration System
+`rustpass config`
+
+Allows updating:
+- default length
+- allowed character sets
+- all changes persisted to config file
+
+## 🧰 CLI Commands (Clap-powered)
+
+- `rustpass` → generate password using saved config  
+- `rustpass validate <value>` → validate password  
+- `rustpass config` → interactive configuration menu  
+
+---
+
+## ⏳ Planned Features
+- Password strength scoring  
+- Entropy-based strength rating  
 
 ---
 
@@ -38,32 +57,48 @@ Industry-inspired validation rules:
 
 This project was created to:
 
-- Learn and practice **Rust fundamentals**
-- Build a real-world **security-oriented CLI tool**
-- Apply clean architecture patterns (layered design)
+- Learn and practice Rust fundamentals  
+- Explore cryptographic randomness in practical applications  
+- Build a real-world security-focused CLI tool  
+- Implement a clean, layered architecture:
+  - cli/ → user interaction
+  - services/ → business logic
+  - models/ → core data structures
+  - config/ → constants + config file
+  - utils/ → helper utilities
 
 ---
 
 ## 🚀 Usage
 
-Run the program and select a mode:
+### Generate password (default)
+`rustpass`
+### Validate a password
+`rustpass validate "<value>"`
+### Configure settings
+`rustpass config`
 
-```text
-1. Password generator
-2. Password validator
-```
+---
 
 ## 🗺 Roadmap
-- [x] Core password generator
-- [x] Configurable options
-- [x] Password policy validator
-- [ ] Strength scoring
+- [x] Core password generator  
+- [x] CLI-based configurable settings  
+- [x] Password policy validator  
+- [ ] Strength scoring system  
+- [ ] Entropy calculation  
 
-## 🛠 Tech
+---
 
-- Rust
-- `rand` crate (OS-backed RNG)
-- Modular architecture (`cli`, `services`, `models`, `utils`)
+## 🛠 Tech Stack
+
+- Rust  
+- rand — cryptographically secure RNG (OsRng)  
+- clap — CLI interface & subcommands  
+- serde + toml — config serialization  
+- directories — cross-platform config location  
+
+---
 
 ## 📌 Disclaimer
-This project is a learning tool and does not aim to fully implement all requirements of NIST SP 800-63B or OWASP ASVS.
+
+This tool is a learning project and does not fully implement requirements of NIST SP 800-63B, OWASP ASVS, or other formal security standards.
