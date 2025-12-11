@@ -1,15 +1,24 @@
+use std::io;
+
 use crate::services::validate_password;
 
-pub fn password_check(value: &str) {
-    let data = value;
+pub fn password_check() {
+    println!("Enter password to validate:");
 
-    if data.trim().is_empty() {
-        println!("Program exit, no value given.");
+    let mut password = String::new();
+
+    io::stdin()
+        .read_line(&mut password)
+        .expect("Failed to read input");
+
+    if password.trim().is_empty() {
+        println!("No input provided.");
         return;
     }
 
-    let password = data.trim();
-    let checker = validate_password(&password);
+    let trimmed = password.trim().to_string();
+
+    let checker = validate_password(&trimmed);
 
     if !checker.is_valid {
         println!("Password is not valid: ");

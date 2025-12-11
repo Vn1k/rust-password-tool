@@ -10,6 +10,6 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Commands {
-    Validate { value: String },
+    Validate,
     Config,
 }

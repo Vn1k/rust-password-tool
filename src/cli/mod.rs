@@ -12,8 +12,8 @@ pub fn main_cli() {
     let cli = Cli::parse();
 
     match cli.command {
-        Some(Commands::Validate { value }) => {
-            password_check(&value);
+        Some(Commands::Validate) => {
+            password_check();
         }
         Some(Commands::Config) => {
             config_menu();
