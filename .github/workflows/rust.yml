@@ -3,11 +3,11 @@ name: Build Release Binaries
 on:
   push:
     tags:
-      - '*'  # Trigger pada semua tag (contoh: 2.0.0, v1.0.0, release-1)
+      - '*'
 
 env:
   CARGO_TERM_COLOR: always
-  BINARY_NAME: rustpass # SUDAH DISESUAIKAN dengan Cargo.toml
+  BINARY_NAME: rustpass
 
 jobs:
   build:
@@ -54,16 +54,12 @@ jobs:
       run: cargo build --release --verbose --target ${{ matrix.target }}
 
     # --- Packaging Artifacts ---
-    # Langkah ini akan menyimpan file hasil build di tab "Actions"
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.BINARY_NAME }}-${{ matrix.os_name }}
         path: target/${{ matrix.target }}/release/${{ env.BINARY_NAME }}${{ matrix.extension }}
 
-    # [OPSIONAL TAPI KEREN]
-    # Langkah ini otomatis menaruh file .exe/binary langsung ke halaman "Releases" GitHub
-    # Jadi orang tinggal download dari menu Release, bukan cari di Artifacts
     - name: Release to GitHub
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
