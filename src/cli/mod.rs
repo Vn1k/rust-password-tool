@@ -1,34 +1,23 @@
 pub mod password_generator;
 pub mod password_validator;
 
+use crate::models::{Cli, Commands};
+use clap::Parser;
 pub use password_generator::password_gen;
 pub use password_validator::password_check;
-use std::io;
 
-pub fn main_ui() {
-    println!("Please choose menu");
-    println!("==================");
-    println!("1. Password generator");
-    println!("2. Password validator");
-    println!("==================");
+pub fn main_cli() {
+    let cli = Cli::parse();
 
-    let mut choose = String::new();
-
-    io::stdin()
-        .read_line(&mut choose)
-        .expect("Failed to read input");
-
-    match choose.trim() {
-        "1" => {
-            println!("Password generator");
+    match cli.command {
+        Some(Commands::Validate { value }) => {
+            password_check(&value);
+        }
+        Some(Commands::Config) => {
+            println!("Run config later")
+        }
+        None => {
             password_gen();
-        }
-        "2" => {
-            println!("Password validator");
-            password_check();
-        }
-        _ => {
-            println!("Invalid number: {}", choose.trim());
         }
     }
 }
