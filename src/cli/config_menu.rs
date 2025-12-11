@@ -1,4 +1,4 @@
-use crate::services::{load_config, save_config};
+use crate::config::{load_config, save_config};
 use std::io::{self, Write};
 
 pub fn config_menu() {

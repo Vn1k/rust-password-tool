@@ -1,5 +1,6 @@
+use crate::config::load_config;
 use crate::models::PasswordOption;
-use crate::services::{build_charset, generate_password, load_config};
+use crate::services::{build_charset, generate_password};
 
 pub fn password_gen() {
     let cfg = load_config();
