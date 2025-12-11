@@ -1,10 +1,11 @@
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
+#[command(name = "rustpass")]
 #[command(author, version, about)]
 pub struct Cli {
     #[command(subcommand)]
-    pub command: Option<Commands>, // <---- OPTIONAL = boleh tanpa argumen
+    pub command: Option<Commands>,
 }
 
 #[derive(Subcommand)]
