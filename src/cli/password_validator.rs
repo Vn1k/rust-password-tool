@@ -2,6 +2,22 @@ use std::io;
 
 use crate::services::validate_password;
 
+fn scoring(score: f64) {
+    if score >= 75.0 {
+        println!("Category password: Excellent");
+        println!("Password strength: {:.2}", score)
+    } else if score >= 50.0 {
+        println!("Category password: Good");
+        println!("Password strength: {:.2}", score)
+    } else if score >= 25.0 {
+        println!("Category password: Weak");
+        println!("Password strength: {:.2}", score)
+    } else {
+        println!("Category password: Poor");
+        println!("Password strength: {:.2}", score)
+    }
+}
+
 pub fn password_check() {
     println!("Enter password to validate:");
 
@@ -19,15 +35,12 @@ pub fn password_check() {
     let trimmed = password.trim().to_string();
 
     let checker = validate_password(&trimmed);
+    scoring(checker.entropy_score);
 
     if !checker.is_valid {
         println!("Password is not valid: ");
         if !checker.valid_min_length {
             println!("- Too short (min length: {})", 12);
-        }
-
-        if !checker.valid_lowercase {
-            println!("- Must contain at least one lowercase letter");
         }
 
         let mut category_count = 0;
@@ -45,7 +58,13 @@ pub fn password_check() {
         }
 
         if category_count < 3 {
-            println!("- Not enough character variety (need at least 3 types)")
+            println!("- Not enough character variety (need at least 3 types).");
+            println!("  Missing types:");
+
+            if !checker.valid_lowercase { println!("   * Lowercase letters (a-z)")}
+            if !checker.valid_uppercase { println!("   * Uppercase letters (A-Z)"); }
+            if !checker.valid_digits { println!("   * Numbers (0-9)"); }
+            if !checker.valid_symbols { println!("   * Symbols (!@#$...)"); }
         }
 
         return;

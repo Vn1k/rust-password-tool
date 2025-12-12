@@ -1,4 +1,6 @@
 use crate::models::PasswordValidatorResult;
+use crate::utils::entropy;
+use crate::config::{POOL_LOWER, POOL_NUMERIC, POOL_SYMBOL, POOL_UPPER};
 
 pub fn validate_password(password: &str) -> PasswordValidatorResult {
     let mut has_lowercase = false;
@@ -17,6 +19,28 @@ pub fn validate_password(password: &str) -> PasswordValidatorResult {
             has_symbols = true;
         }
     }
+
+    let mut pool_size = 0.0;
+    if has_lowercase {
+        pool_size += POOL_LOWER
+    }
+    if has_uppercase {
+        pool_size += POOL_UPPER
+    }
+    if has_digits {
+        pool_size += POOL_NUMERIC
+    }
+    if has_symbols {
+        pool_size += POOL_SYMBOL
+    }
+
+    let long = password.len() as f64;
+
+    let entropy_score = if pool_size > 0.0 {
+        entropy(long, pool_size)
+    } else {
+        0.0
+    };
 
     let mut category_count = 0;
     if has_lowercase {
@@ -48,6 +72,7 @@ pub fn validate_password(password: &str) -> PasswordValidatorResult {
         valid_uppercase,
         valid_digits,
         valid_symbols,
+        entropy_score
     };
 
     validator
