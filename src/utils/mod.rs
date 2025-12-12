@@ -1,3 +1,3 @@
-pub mod confirmation;
+mod entropy_calculation;
 
-pub use confirmation::confirmation_user;
+pub use entropy_calculation::entropy;

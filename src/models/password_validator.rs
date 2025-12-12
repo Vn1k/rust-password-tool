@@ -5,4 +5,5 @@ pub struct PasswordValidatorResult {
     pub valid_uppercase: bool,
     pub valid_digits: bool,
     pub valid_symbols: bool,
+    pub entropy_score: f64
 }

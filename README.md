@@ -17,41 +17,54 @@ Designed as a learning-oriented CLI project focused on security, clean architect
   - Symbols
 - Configuration is stored in `~/.config/rustpass/config.toml`
 
-### 🛡 Password Validator
-Follows common industry password rules:
-- Minimum length: **12 characters**
-- Must include lowercase
-- Must include 3 out of 4 categories:
-  - Uppercase
-  - Digit
-  - Symbol
-  - (Lowercase always required)
-
-Validator provides clear feedback on failing rules.
+### 🛡 Password Validator & Scoring
+Follows common industry password rules with entropy calculation:
+- **Smart Validation:**
+  - Minimum length: **12 characters**
+  - Must include lowercase
+  - Must include 3 out of 4 categories (Uppercase, Digit, Symbol, Lowercase)
+- **Entropy Calculation:** Calculates information entropy (bits) to measure theoretical strength.
+- **Strength Scoring:** Categorizes password into Poor, Weak, Good, or Excellent.
 
 ---
+
+## 🛠 Installation & Usage
+
+Ensure you have Rust and Cargo installed.
+
+```bash
+# Clone the repository
+git clone [https://github.com/vinik/rustpass.git](https://github.com/vinik/rustpass.git)
+cd rustpass
+
+# Option 1: Install globally (Recommended)
+# This allows you to run 'rustpass' from anywhere in your terminal
+cargo install --path .
+
+# Option 2: Run directly without installing
+cargo run --release
+
+# Option 3: Build binary manually
+cargo build --release
+./target/release/rustpass
+```
+
+### Commands
+- Generate Password (uses default config):
+```bash
+rustpass
+```
+- Validate a Password (Check strength & entropy):
+```bash
+rustpass validate
+```
+- Configure Settings:
+```bash
+rustpass config
+```
 
 ## ⚙ Configuration System
-`rustpass config`
-
-Allows updating:
-- default length
-- allowed character sets
-- all changes persisted to config file
-
-## 🧰 CLI Commands (Clap-powered)
-
-- `rustpass` → generate password using saved config  
-- `rustpass validate <value>` → validate password  
-- `rustpass config` → interactive configuration menu  
-
----
-
-## ⏳ Planned Features
-- Password strength scoring  
-- Entropy-based strength rating  
-
----
+Allows updating default length and allowed character sets. All changes are persisted to the config file using Serde and toml.
 
 ## 🧩 Project Goals
 
@@ -61,22 +74,11 @@ This project was created to:
 - Explore cryptographic randomness in practical applications  
 - Build a real-world security-focused CLI tool  
 - Implement a clean, layered architecture:
-  - cli/ → user interaction
-  - services/ → business logic
-  - models/ → core data structures
-  - config/ → constants + config file
-  - utils/ → helper utilities
-
----
-
-## 🚀 Usage
-
-### Generate password (default)
-`rustpass`
-### Validate a password
-`rustpass validate "<value>"`
-### Configure settings
-`rustpass config`
+  - `cli/` → user interaction
+  - `services/` → business logic
+  - `models/` → core data structures
+  - `config/` → constants + config file
+  - `utils/` → helper utilities
 
 ---
 
@@ -84,8 +86,8 @@ This project was created to:
 - [x] Core password generator  
 - [x] CLI-based configurable settings  
 - [x] Password policy validator  
-- [ ] Strength scoring system  
-- [ ] Entropy calculation  
+- [x] Strength scoring system  
+- [x] Entropy calculation  
 
 ---
 
